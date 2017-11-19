@@ -48,7 +48,7 @@ for k in range(1, n - 1):
             for i in V:  # V not include 0
                 if i not in A:
                     for j in A:
-                        B = copy.deepcopy(A)  # note copy.deepcopy(A).remove(j) not work correctly as your think
+                        B = copy.deepcopy(A)  # note copy.deepcopy(A).remove(j) not work, remove() have no return value.
                         B.remove(j)
                         if D[i][encode_city(A)] == 0 or D[i][encode_city(A)] > (W[i][j] + D[j][encode_city(B)]):
                             D[i][encode_city(A)] = W[i][j] + D[j][encode_city(B)]
