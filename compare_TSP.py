@@ -2,6 +2,7 @@ import random
 import time
 import TSP_DP
 import TSP_BS
+import TSP_BS_average
 
 
 def random_matrix(n):  # it will generate a matrix n x n and diagonal is 0.
@@ -25,6 +26,4 @@ start_time = time.time()
 TSP_BS.TSP_BS(matrix)
 end_time = time.time()
 print("BS version : ", end_time - start_time)
-for i in range(10):
-    matrix = random_matrix(15)
-    TSP_BS.TSP_BS(matrix)
+TSP_BS_average.TSP_BS_avg(matrix)
