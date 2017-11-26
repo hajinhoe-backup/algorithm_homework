@@ -1,2 +1,3 @@
-string = "dad"
-print(string[:-1])
+import random
+
+print(random.randrange(0,2))

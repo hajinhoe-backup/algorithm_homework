@@ -1,6 +1,7 @@
 # This will find out minimum path.
 import heapq
 import copy
+import random
 
 
 class Node:
@@ -86,8 +87,39 @@ def TSP_BS(W):
                     else:
                         u.bound = get_bound(u, W)
                         if u.bound < min_length or min_length == -1:
-                            heapq.heappush(PQ, copy.deepcopy(u))
+                            if len(PQ) > 0:
+                                c = heapq.heappop(PQ)
+                                if c.level == u.level:
+                                    if c.bound < u.bound:
+                                        if random.randrange(0, c.level) > 0:
+                                            if random.randrange(0, 2) == 0:
+                                                heapq.heappush(PQ, copy.deepcopy(c))
+                                            else:
+                                                heapq.heappush(PQ, copy.deepcopy(c))
+                                                heapq.heappush(PQ, copy.deepcopy(u))
+                                        elif random.randrange(0, 10)  == 0:
+                                            heapq.heappush(PQ, copy.deepcopy(u))
+                                        else:
+                                            heapq.heappush(PQ, copy.deepcopy(c))
+                                            heapq.heappush(PQ, copy.deepcopy(u))
+                                    else:
+                                        if random.randrange(0, c.level) > 0:
+                                            if random.randrange(0, 2) == 0:
+                                                heapq.heappush(PQ, copy.deepcopy(u))
+                                            else:
+                                                heapq.heappush(PQ, copy.deepcopy(c))
+                                                heapq.heappush(PQ, copy.deepcopy(u))
+                                        elif random.randrange(0, 10) == 0:
+                                            heapq.heappush(PQ, copy.deepcopy(c))
+                                        else:
+                                            heapq.heappush(PQ, copy.deepcopy(c))
+                                            heapq.heappush(PQ, copy.deepcopy(u))
+                                else:
+                                    heapq.heappush(PQ, copy.deepcopy(u))
+                            else:
+                                heapq.heappush(PQ, copy.deepcopy(u))
 
+    print("i am monte---------------------------------")
     print("the optimal path is : ", opt_tour)
     print("the min_length is : ", min_length)
     return tot_node
