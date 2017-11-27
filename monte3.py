@@ -122,7 +122,8 @@ def TSP_BS(W):
     print("i am monte---------------------------------")
     print("the optimal path is : ", opt_tour)
     print("the min_length is : ", min_length)
-    return tot_node
+    #return tot_node
+    return min_length
 
 
 # Set W as weight of edge.

@@ -1,6 +1,7 @@
 # This will find out minimum path.
 import heapq
 import copy
+import random
 
 
 class Node:
@@ -57,6 +58,7 @@ def get_length(node, w):
 
 
 def TSP_BS(W):
+    rand_bound = 0
     PQ = []  # initialize PQ to be empty
     v = Node(0, [1])
     v.bound = get_bound(v, W)
@@ -86,11 +88,32 @@ def TSP_BS(W):
                     else:
                         u.bound = get_bound(u, W)
                         if u.bound < min_length or min_length == -1:
-                            heapq.heappush(PQ, copy.deepcopy(u))
+                            if len(PQ) > 0:
+                                c = heapq.heappop(PQ)
+                                if c.level == u.level:
+                                    if c.bound < u.bound:
+                                        if u.level > random.randrange(rand_bound, max(u.level, rand_bound +1)):
+                                            heapq.heappush(PQ, copy.deepcopy(c))
+                                        else:
+                                            heapq.heappush(PQ, copy.deepcopy(c))
+                                            heapq.heappush(PQ, copy.deepcopy(u))
+                                    else:
+                                        if u.level > random.randrange(rand_bound, max(u.level, rand_bound +1)):
+                                            heapq.heappush(PQ, copy.deepcopy(u))
+                                        else:
+                                            heapq.heappush(PQ, copy.deepcopy(c))
+                                            heapq.heappush(PQ, copy.deepcopy(u))
+                                else:
+                                    heapq.heappush(PQ, copy.deepcopy(u))
+                                    heapq.heappush(PQ, copy.deepcopy(c))
+                            else:
+                                heapq.heappush(PQ, copy.deepcopy(u))
 
+    print("i am monte3re---------------------------------")
     print("the optimal path is : ", opt_tour)
     print("the min_length is : ", min_length)
-    return tot_node
+    #return tot_node
+    return (min_length, tot_node)
 
 
 # Set W as weight of edge.

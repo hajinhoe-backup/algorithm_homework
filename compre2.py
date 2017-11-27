@@ -4,6 +4,7 @@ import TSP_BS
 import monte3
 
 
+
 def random_matrix(n):  # it will generate a matrix n x n and diagonal is 0.
     matrix = [[0 for cor in range(n)] for row in range(n)]
     for i in range(n):
